@@ -1,33 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Personal from "./components/Personal";
-import Education from "./components/Education"
+// import Education from "./components/Education";
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      editable: true,
-    };
-  }
+const App = () => {
+  const [editable, setEditable] = useState(true);
+  const [personalName, setPersonalName] = useState("Demo");
+  const [personalEmail, setPersonalEmail] = useState("abc@xyz.com");
+  const [personalPhone, setPersonalPhone] = useState("9800000000");
 
-  togglePersonalEdit = () => {
-    this.setState(()=>{
-      if (this.state.editable) return {editable: false}
-      else return {editable: true}
-    });
-  };
+  let content = (
+    <div className="callout-warning">
+      <Personal
+        editable={editable}
+        personalName={personalName}
+        setPersonalName={setPersonalName}
+        personalEmail={personalEmail}
+        setPersonalEmail={setPersonalEmail}
+        personalPhone={personalPhone}
+        setPersonalPhone={setPersonalPhone}
+      />
+    </div>
+  );
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.togglePersonalEdit}>
-          {this.state.editable ? "Done" : "Edit"}
-        </button>
-        <Personal editable={this.state.editable} />
-        <Education editable={this.state.editable} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <button className="btn btn-dark"
+        onClick={() => {
+          setEditable(!editable);
+        }}
+      >
+        {editable ? "Done" : "Edit"}
+      </button>
+      {content}
+    </div>
+  );
+};
 
 export default App;

@@ -1,13 +1,19 @@
-import React from "react"
+import React from "react";
 
-class Education extends React.Component {
+const Education = (props) => {
+  let content = ""
 
-  render() {
-    
-    return(
-      <div>Educational details {this.props.editable ? "can" : "cannot"} be modified</div>
-    )
+  if (props.isEditable) {
+    //<input onChange={} type='text' />
+  } else {
+    //static content
   }
-}
+
+  return (
+    <div>
+      {content}
+    </div>
+  );
+};
 
 export default Education;

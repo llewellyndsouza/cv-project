@@ -1,13 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react";
 
-class Personal extends React.Component {
+const Personal = (props) => {
+  const { editable, personalName, setPersonalName } = props;
 
-  render() {
-    
-    return(
-      <div>Personal details {this.props.editable ? "can" : "cannot"} be modified</div>
-    )
+  let content = "";
+
+  const updatePersonalName = (e) => {
+    setPersonalName(e.target.value);
+  };
+
+  if (editable) {
+    content = (
+      <input className="form-control" id="personalNameInput" onChange={updatePersonalName} type="text" />
+    );
+  } else {
+    content = <p className="lead">{personalName}</p>;
   }
-}
+
+  useEffect(() => {
+    if (editable)
+      document.getElementById("personalNameInput").value = personalName;
+  });
+
+  return (<div className="container">{content}</div>);
+};
 
 export default Personal;
